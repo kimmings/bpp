@@ -1,7 +1,7 @@
 # Course search and registration
 
 ## User Story 1
-- [ ] As Learner I need to be able to see a list of Courses available to me from a Course Catalogue and find a Course, I am interested in.
+- [x] As Learner I need to be able to see a list of Courses available to me from a Course Catalogue and find a Course, I am interested in.
 
 ### Acceptance Criteria
 
@@ -19,10 +19,10 @@ Management | A Management Course | £200 | Classroom  | 10
 ### Acceptance Criteria
 
 - [ ] A Learner has a Name and Email
-- [ ] Each Classroom Course has a max seat limit
-- [ ] Each Online Course has unlimited availability
+- [x] Each Classroom Course has a max seat limit
+- [x] Each Online Course has unlimited availability
 - [ ] I am not allowed to Register onto a Classroom Course if the limit has been reached, and must be informed of this
 - [ ] I should be able to see the Availability of the Course
-- [ ] I can only Register once onto a Course
-- [ ] I can Register onto many different Courses
+- [x] I can only Register once onto a Course
+- [x] I can Register onto many different Courses
 - [ ] I can see that I'm Registered on a Course
