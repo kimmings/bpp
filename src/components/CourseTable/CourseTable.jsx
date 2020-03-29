@@ -11,9 +11,8 @@ const useStyles = makeStyles({
   },
 });
 
-export default ({ data, action }) => {
+export default ({ currentUser, courses, action }) => {
   const classes = useStyles();
-  const { currentUser, courses } = data;
   return ( 
     <Table className={classes.table} aria-label="simple table">
       <Headings />
