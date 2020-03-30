@@ -1,5 +1,8 @@
 # Course search and registration
 
+This app was created using [create-reaact-app](https://github.com/facebook/create-react-app) and [yarn](https://yarnpkg.com/).
+It was sanity checked using BrowserStack/Windows8/IE10.
+
 ## Run in development mode
 - open your terminal of choice
 - run `yarn && yarn start`
