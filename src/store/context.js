@@ -16,6 +16,8 @@ const CourseContext = createContext({
 })
 
 const registerUser = (currentUser, courses, courseId) => {
+  if(courses[courseId].attendees.indexOf(currentUser.id) > -1) return courses;
+
   const newCourses = clone(courses);
   newCourses[courseId].attendees.push(currentUser.id);
   return newCourses;
@@ -58,4 +60,4 @@ const CourseProvider = ({ children }) => {
 }
 
 export default CourseContext;
-export { CourseProvider }
+export { CourseProvider, registerUser, deregisterUser }
