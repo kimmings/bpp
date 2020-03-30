@@ -1,20 +1,12 @@
 import React from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
-import { makeStyles } from '@material-ui/core/styles';
 import Headings from './Headings';
 import CourseRow from './CourseRow';
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
-});
-
 export default ({ currentUser, courses, action }) => {
-  const classes = useStyles();
   return ( 
-    <Table className={classes.table} aria-label="simple table">
+    <Table>
       <Headings />
       <TableBody>
         { Object.values(courses).map( row => {
