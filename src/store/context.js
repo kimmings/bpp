@@ -1,12 +1,13 @@
 import React, { createContext, useState, useContext } from "react"
+import { clone } from 'ramda';
 import courses from './courses';
 
+/* values would be pulled from server via async api fetch */
 const currentUser = {
     id: 123,
     firstName: 'Bilbo',
     lastName: 'Baggins',
     email: 'baggins@the-shire.com',
-    courses: []
   };
 
 const CourseContext = createContext({
@@ -15,52 +16,16 @@ const CourseContext = createContext({
 })
 
 const registerUser = (currentUser, courses, courseId) => {
-  const newCourses = courses.reduce((accumulator, item) => {
-    const newItem = { ...item };
-    if(newItem.id === courseId){ 
-      newItem.attendance = newItem.attendance + 1;
-    }
-
-    accumulator.push(newItem);
-    return accumulator;
-  }, []);
-
-  const user = {
-    ...currentUser,
-    courses: [ ...currentUser.courses, courseId]   
-  };
-  
-  return { 
-    courses: newCourses,
-    currentUser: user
-  };
+  const newCourses = clone(courses);
+  newCourses[courseId].attendees.push(currentUser.id);
+  return newCourses;
 }
 
 const deregisterUser = (currentUser, courses, courseId) => {
-  if(currentUser.courses.indexOf(courseId) === -1) return { currentUser, courses };
-
-  const newCourses = courses.reduce((accumulator, item) => {
-    const newItem = { ...item };
-    if(newItem.id === courseId){ 
-      newItem.attendance = newItem.attendance - 1;
-    }
-
-    accumulator.push(newItem);
-    return accumulator;
-  }, []);
-
-
-  const userCourses = currentUser.courses.filter(id => id !== courseId);
-
-  const user = {
-    ...currentUser,
-    courses: userCourses   
-  };
-
-  return { 
-    courses: newCourses,
-    currentUser: user
-  };
+  const newCourses = clone(courses);
+  const course = newCourses[courseId];
+  course.attendees = course.attendees.filter(id => id !== currentUser.id);
+  return newCourses;
 };
 
 const CourseProvider = ({ children }) => {
@@ -69,14 +34,14 @@ const CourseProvider = ({ children }) => {
   const [stateUser, setStateUser] = useState(currentUser);
 
   const register = courseId => {
-    let state;
-    if(stateUser.courses.indexOf(courseId) > -1 ) {
-      state = deregisterUser(stateUser, stateCourses, courseId)
+    let newCourses;
+    const course = stateCourses[courseId];
+    if(course.attendees.indexOf(stateUser.id) > -1) {
+      newCourses = deregisterUser(stateUser, stateCourses, courseId)
     } else {
-      state = registerUser(stateUser, stateCourses, courseId);  
+      newCourses = registerUser(stateUser, stateCourses, courseId);  
     }
-    setStateCourses(state.courses);
-    setStateUser(state.currentUser);
+    setStateCourses(newCourses);
   }
 
   return (
