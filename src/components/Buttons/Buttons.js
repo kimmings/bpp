@@ -18,8 +18,8 @@ const getProps = registered => {
 const RegisterButton = ({ action, registered } ) => {
   const { label, color } = getProps(registered);
   return <Button 
-    onClick={action}
     variant='contained'
+    onClick={action}
     color={color}
   >{label}</Button>
 };

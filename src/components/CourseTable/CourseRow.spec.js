@@ -5,13 +5,13 @@ import TableCell from '@material-ui/core/TableCell';
 const defaultProps = {
   action: jest.fn(),
   userRegistered: false,
-  id: 1234,
+  courseId: 1234,
   title: 'Course Foo',
   description: 'Description Foo',
   cost: 300,
   type: 'Online',
   seats: 10,
-  attendance: 1,
+  attendees: [1],
 };
 
 const setUp = (props = {})  => {

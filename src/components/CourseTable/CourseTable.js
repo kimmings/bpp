@@ -17,9 +17,9 @@ export default ({ currentUser, courses, action }) => {
     <Table className={classes.table} aria-label="simple table">
       <Headings />
       <TableBody>
-        { courses.map( row => {
+        { Object.values(courses).map( row => {
           const { id, ...rest } = row;
-          const registered = currentUser.courses.indexOf(id) > -1;
+          const registered = rest.attendees.indexOf(currentUser.id) > -1;
           return (<CourseRow 
             key={id} 
             { ...rest } 

@@ -13,10 +13,10 @@ const CourseRow = ({
   cost, 
   type, 
   seats, 
-  attendance 
+  attendees,
 }) => {
-  const courseFull = type !== 'Online' && seats === attendance;
-
+  const courseFull = type !== 'Online' && seats === attendees.length;
+  
   const registerAction = () => action(courseId);
 
   return (
@@ -25,25 +25,25 @@ const CourseRow = ({
       <TableCell align="left">{description}</TableCell>
       <TableCell align="center">&pound;{cost}</TableCell>
       <TableCell align="center">{type}</TableCell>
-      <TableCell align="center">{ type === 'Classroom' ? seats - attendance : 'unlimited'}</TableCell>
+      <TableCell align="center">{ type === 'Classroom' ? seats - attendees.length : 'unlimited'}</TableCell>
       <RegisterCell courseFull={courseFull} userRegistered={userRegistered} action={registerAction} courseId={courseId} /> 
     </TableRow>
   );
 };
 
 CourseRow.propTypes = {
-  action: PropTypes.func,
-  userRegistered: PropTypes.bool,
-  courseId: PropTypes.number,
-  title: PropTypes.string,
-  description: PropTypes.string,
-  cost: PropTypes.number,
-  type: PropTypes.string,
+  action: PropTypes.func.isRequired,
+  userRegistered: PropTypes.bool.isRequired,
+  courseId: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  cost: PropTypes.number.isRequired,
+  type: PropTypes.string.isRequired,
   seats: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
-  ]),
-  attendance: PropTypes.number
+  ]).isRequired,
+  attendees: PropTypes.array.isRequired
 };
 
 export default CourseRow;
